@@ -1,40 +1,22 @@
-#!/usr/bin/env bash
+import math
 
-check_factor()
-{
-	if [ $# -ne 3 ];
-        then
-                args= fi
-                count=0
-                num2=1
-                for a in ${args[*]};
-                do
-                        if [ $count -gt 1 ];
-                        then
-                                num2=$(echo $a*$num2 | bc)
-                        fi
-                        count=$((count + 1))
-                done
-        else
-                num2=$3
-        fi
+def trial_division(n):
+  """Returns the smallest prime factor of n, or None if n is prime."""
+  for i in range(2, int(math.sqrt(n)) + 1):
+    if n % i == 0:
+      return i
+  return None
 
-        num1=$2
-        num=$(echo "$1" | tr ':' '=')
-        echo "$num$num1*$num2"
-}
+def main():
+  with open('tests/rsa-15') as f:
+    n = int(f.read().strip())
+    p = trial_division(n)
+    if p is None:
+      print('{} is prime.'.format(n))
+    else:
+      q = n // p
+      print('{}={}*{}'.format(n, p, q))
 
-if [ $# -ne 1 ]
-then
-        echo 'Usage: rsa <file>'
-        exit 1
-else
+if __name__ == '__main__':
+  main()
 
-        while read i
-        do
-
-                result=$(factor "$i")
-                check_factor $result
-
-        done < "$1"
-fi
