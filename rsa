@@ -1,0 +1,26 @@
+#!/usr/bin/python3
+
+from sys import argv
+
+def pprime(a):
+    if a == 1:
+        return False
+    for i in range(2, int(a ** 0.5)):
+        if a % i == 0:
+            return False
+    return True
+def pfact():
+    with open(argv[1]) as f:
+        for line in f:
+            i = int(line)
+            print("{:d}=".format(i), end='')
+            if i % 2 == 0 and pprime(i // 2):
+                print("{}*2".format(i // 2))
+            root = int(i ** 0.5)
+            for j in range(3, root + 1, 2):
+                if i % j == 0 and pprime(j) and pprime(i // j):
+                    print("{}*{}".format(j, i // j))
+                    break
+
+if __name__ == "__main__":
+    pfact()
