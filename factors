@@ -1,0 +1,23 @@
+#!/usr/bin/python3
+
+
+from sys import argv
+def factor():
+    with open(argv[1], "r", encoding="UTF-8") as f:
+        for line in f:
+            i = int(line)
+            print("{}=".format(i), end='')
+            if i % 2 == 0:
+                print("{}*2".format(i // 2))
+                continue
+            root = int(i ** 0.5)
+            if root % 2 == 0:
+                root += 1
+            for j in range(3, root + 1, 2):
+                if i % j == 0:
+                    print("{}*{}".format(j, (i // j)))
+                    break
+            if i % j != 0:
+                print("{}*1".format(i))
+if __name__ == "__main__":
+    factor()
