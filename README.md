@@ -1,7 +1,6 @@
 # RSA-Factoring-Challenge
 
 
-
 ## Resources
    **Read or watch:**
 
